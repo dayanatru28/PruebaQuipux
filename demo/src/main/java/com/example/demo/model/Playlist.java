@@ -17,10 +17,9 @@ public class Playlist {
     private String descripcion;
 
     @OneToMany(mappedBy = "playlist", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonManagedReference  // <- Aquí para evitar la anidación infinita en JSON
+    @JsonManagedReference
     private List<Song> canciones;
 
-    // Getters y Setters
 
     public Long getId() {
         return id;

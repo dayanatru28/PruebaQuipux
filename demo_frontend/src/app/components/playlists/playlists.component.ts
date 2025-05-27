@@ -14,7 +14,7 @@ export class PlaylistsComponent {
   listas: Playlist[] = [];
   mensaje: string = '';
 
-  // ¡Declara aquí el FormControl para la búsqueda!
+  // FormControl para la búsqueda
   buscarNombreControl: FormControl = new FormControl('');
 
   playlistEncontrada?: Playlist;
@@ -33,6 +33,13 @@ export class PlaylistsComponent {
     });
 
     this.cargarListas();
+
+    // Limpiar mensajes y resultados cuando el usuario escribe en el buscador
+    this.buscarNombreControl.valueChanges.subscribe(() => {
+      this.mensajeError = '';
+      this.playlistEncontrada = undefined;
+      this.mensaje = '';
+    });
   }
 
   get canciones(): FormArray {
@@ -67,9 +74,15 @@ export class PlaylistsComponent {
   }
 
   crearPlaylist() {
+    // Limpiar mensajes y búsqueda antes de crear
+    this.mensaje = '';
+    this.mensajeError = '';
+    this.playlistEncontrada = undefined;
+    // Opcional: this.buscarNombreControl.setValue('');
+
     if (this.playlistForm.valid) {
       const nuevaLista: Playlist = this.playlistForm.value;
-      
+
       this.playlistService.crearLista(nuevaLista).subscribe({
         next: () => {
           this.mensaje = 'Lista creada con éxito';
@@ -88,6 +101,12 @@ export class PlaylistsComponent {
   }
 
   eliminarLista(nombre: string) {
+    // Limpiar mensajes y búsqueda antes de eliminar
+    this.mensaje = '';
+    this.mensajeError = '';
+    this.playlistEncontrada = undefined;
+    // Opcional: this.buscarNombreControl.setValue('');
+
     if (confirm(`¿Está seguro que quiere eliminar la lista "${nombre}"?`)) {
       this.playlistService.eliminarLista(nombre).subscribe({
         next: () => {

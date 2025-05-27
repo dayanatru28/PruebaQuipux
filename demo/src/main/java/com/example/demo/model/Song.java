@@ -18,10 +18,8 @@ public class Song {
 
     @ManyToOne
     @JoinColumn(name = "playlist_id")
-    @JsonBackReference  // <- Aquí para evitar la anidación infinita en JSON
+    @JsonBackReference 
     private Playlist playlist;
-
-    // Getters y Setters
 
     public Long getId() {
         return id;

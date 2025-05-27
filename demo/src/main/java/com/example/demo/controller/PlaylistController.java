@@ -26,7 +26,6 @@ public class PlaylistController {
     @PostMapping
     public ResponseEntity<?> crearLista(@RequestBody Playlist playlist) {
         try {
-            // Validar que el nombre no sea null o vacío
             if (playlist == null || !StringUtils.hasText(playlist.getNombre())) {
                 return ResponseEntity.badRequest().body("Nombre inválido: no puede estar vacío");
             }
@@ -36,7 +35,6 @@ public class PlaylistController {
         } catch (IllegalArgumentException e) {
             return ResponseEntity.badRequest().body("Nombre inválido: " + e.getMessage());
         } catch (Exception e) {
-            // Aquí puedes hacer un log del error si quieres
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error inesperado");
         }
     }

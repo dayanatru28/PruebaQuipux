@@ -19,8 +19,6 @@ public class PlaylistService {
         if (playlist.getNombre() == null || playlist.getNombre().isEmpty()) {
             throw new IllegalArgumentException("El nombre de la lista no puede ser nulo o vacío.");
         }
-
-        // Relacionar canciones con la playlist
         if (playlist.getCanciones() != null) {
             for (Song song : playlist.getCanciones()) {
                 song.setPlaylist(playlist);

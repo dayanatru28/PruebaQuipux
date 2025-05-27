@@ -37,7 +37,7 @@ public class SecurityConfig {
     @Bean
     public AuthenticationProvider authenticationProvider() {
         DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
-        authProvider.setUserDetailsService(myUserDetailsService); // esto falla si no defines ese bean
+        authProvider.setUserDetailsService(myUserDetailsService);
         authProvider.setPasswordEncoder(passwordEncoder());
         return authProvider;
     }
@@ -52,13 +52,13 @@ public class SecurityConfig {
         http
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll() // Permitir OPTIONS para CORS
+                        .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll() 
                         .requestMatchers("/lists/**").authenticated()
                         .anyRequest().permitAll())
                 .httpBasic()
                 .and()
                 .addFilterBefore((request, response, chain) -> {
-                    HttpServletRequest httpRequest = (HttpServletRequest) request; // Conversión necesaria
+                    HttpServletRequest httpRequest = (HttpServletRequest) request; 
 
                     String authHeader = httpRequest.getHeader("Authorization");
                     if (authHeader != null && authHeader.startsWith("Basic ")) {
