@@ -7,18 +7,24 @@ import { ProductosAdministradorComponent } from './components/productos-administ
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import { PlaylistsComponent } from './components/playlists/playlists.component';
+import { AuthService } from './services/auth.service';
+import { RouterModule } from '@angular/router'; 
+import { RegistrarUsuariosComponent } from './components/registrar-usuarios/registrar-usuarios.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ProductosAdministradorComponent,
-    PlaylistsComponent
+    PlaylistsComponent,
+    AppComponent,
+    RegistrarUsuariosComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    RouterModule 
   ],
   providers: [
     provideClientHydration()
