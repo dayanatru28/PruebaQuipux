@@ -1,0 +1,101 @@
+<div class="container">
+  <div class="title-div">
+    <h1>Panel de Administración de Productos</h1>
+  </div>
+
+  <button class="add-button" (click)="nuevoProducto(modalContent)">
+    Agregar Producto
+    <i class="fas fa-plus"></i>
+  </button>
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Nombre</th>
+        <th>Descripción</th>
+        <th>Proveedor</th>
+        <th>Cantidad</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let producto of productos">
+        <td>{{ producto.pt_nombre }}</td>
+        <td>{{ producto.pt_descripcin }}</td>
+        <td>{{ producto.pt_proveedor }}</td>
+        <td>{{ producto.pt_cantidad }}</td>
+        <td>
+          <div class="btn-container">
+            <button class="btn-edit" (click)="selectItem(producto, modalContent)">
+              <i class="fas fa-edit"></i> Editar
+            </button>
+
+            <button (click)="toggleEstado(producto)"
+              [ngClass]="{
+                'btn-toggle btn-active': producto.pt_estado === 1,
+                'btn-toggle btn-inactive': producto.pt_estado === 0
+              }">
+              <i [ngClass]="producto.pt_estado === 1 ? 'fas fa-toggle-on' : 'fas fa-toggle-off'"></i>
+              {{ producto.pt_estado === 1 ? 'Activo' : 'Inactivo' }}
+            </button>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- Modal Angular -->
+<ng-template #modalContent let-modal>
+  <div class="modal fade show" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true" style="display:block;">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">{{ isUpdate ? 'Editar producto' : 'Añadir nuevo producto' }}</h5>
+        </div>
+        <div class="modal-body">
+          <form [formGroup]="formProductos" (ngSubmit)="submitProducto()">
+            <div class="mb-3">
+              <label for="pt_nombre" class="form-label">Nombre:</label>
+              <input type="text" id="pt_nombre" class="form-control" formControlName="pt_nombre" />
+              <div *ngIf="formProductos.get('pt_nombre')?.invalid && (formProductos.get('pt_nombre')?.dirty || formProductos.get('pt_nombre')?.touched)">
+                <small class="text-danger">Este campo es obligatorio.</small>
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label for="pt_descripcion" class="form-label">Descripción:</label>
+              <input type="text" id="pt_descripcion" class="form-control" formControlName="pt_descripcin" />
+              <div *ngIf="formProductos.get('pt_descripcin')?.invalid && (formProductos.get('pt_descripcin')?.dirty || formProductos.get('pt_descripcin')?.touched)">
+                <small class="text-danger">Este campo es obligatorio.</small>
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label for="pt_proveedor" class="form-label">Proveedor:</label>
+              <input type="text" id="pt_proveedor" class="form-control" formControlName="pt_proveedor" />
+              <div *ngIf="formProductos.get('pt_proveedor')?.invalid && (formProductos.get('pt_proveedor')?.dirty || formProductos.get('pt_proveedor')?.touched)">
+                <small class="text-danger">Este campo es obligatorio.</small>
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label for="pt_cantidad" class="form-label">Cantidad:</label>
+              <input type="number" min="0" id="pt_cantidad" class="form-control" formControlName="pt_cantidad" />
+              <div *ngIf="formProductos.get('pt_cantidad')?.invalid && (formProductos.get('pt_cantidad')?.dirty || formProductos.get('pt_cantidad')?.touched)">
+                <small class="text-danger">Debe ser un número válido.</small>
+              </div>
+            </div>
+
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" (click)="modal.dismiss()">Cancelar</button>
+              <button type="submit" class="btn btn-primary" [disabled]="formProductos.invalid">
+                {{ isUpdate ? 'Actualizar' : 'Guardar' }}
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>

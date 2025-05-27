@@ -1,0 +1,93 @@
+<div class="container">
+
+  <div class="busqueda-playlist">
+    <h2>🔍 Buscar Playlist</h2>
+
+    <div class="busqueda-form">
+      <input id="buscarNombre" type="text" [formControl]="buscarNombreControl" placeholder="Nombre de la playlist" />
+      <button class="btn btn-buscar" (click)="buscarPlaylist()">Buscar</button>
+    </div>
+    <div class="error" *ngIf="mensajeError">{{ mensajeError }}</div>
+  </div>
+
+  <div *ngIf="playlistEncontrada" class="resultado-busqueda card">
+    <h3>Playlist encontrada</h3>
+    <p><strong>Nombre:</strong> {{ playlistEncontrada.nombre }}</p>
+    <p><strong>Descripción:</strong> {{ playlistEncontrada.descripcion }}</p>
+  </div>
+
+
+  <hr />
+
+  <h2>📚 Playlists Existentes</h2>
+  <ul class="listas">
+    <li *ngFor="let lista of listas" class="lista-item card">
+      <div>
+        <strong>{{ lista.nombre }}</strong> - {{ lista.descripcion }}
+      </div>
+      <button (click)="eliminarLista(lista.nombre)" class="btn btn-delete" title="Eliminar playlist">
+        &times;
+      </button>
+    </li>
+  </ul>
+  <br>
+  <hr />
+
+  <h2>🎧 Crear Nueva Playlist</h2>
+  <form [formGroup]="playlistForm" (ngSubmit)="crearPlaylist()" novalidate>
+    <div class="form-group">
+      <label for="nombre">Nombre <span class="required">*</span></label>
+      <input id="nombre" type="text" formControlName="nombre"
+        [class.invalid]="playlistForm.get('nombre')?.invalid && playlistForm.get('nombre')?.touched"
+        placeholder="Ingresa el nombre de la playlist" />
+      <div *ngIf="playlistForm.get('nombre')?.invalid && playlistForm.get('nombre')?.touched" class="error">
+        El nombre es obligatorio.
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="descripcion">Descripción</label>
+      <textarea id="descripcion" formControlName="descripcion" placeholder="Descripción opcional" rows="3"></textarea>
+    </div>
+
+    <div formArrayName="canciones" class="canciones-container">
+      <div class="header-canciones">
+        <h3>🎼 Canciones</h3>
+        <button type="button" (click)="agregarCancion()" class="btn btn-agregar">
+          + Agregar Canción
+        </button>
+      </div>
+      <br>
+      <div *ngFor="let cancion of canciones.controls; let i = index" [formGroupName]="i" class="cancion-item card">
+        <div class="cancion-header">
+          <strong>Canción {{ i + 1 }}</strong>
+          <button type="button" (click)="eliminarCancion(i)" class="btn btn-delete" title="Eliminar canción">
+            &times;
+          </button>
+        </div>
+
+        <div class="form-row">
+          <label>Título <span class="required">*</span></label>
+          <input type="text" formControlName="titulo"
+            [class.invalid]="cancion.get('titulo')?.invalid && cancion.get('titulo')?.touched"
+            placeholder="Título de la canción" />
+          <div *ngIf="cancion.get('titulo')?.invalid && cancion.get('titulo')?.touched" class="error">
+            El título es obligatorio.
+          </div>
+        </div>
+
+        <div class="form-row"><label>Artista</label><input type="text" formControlName="artista" /></div>
+        <div class="form-row"><label>Álbum</label><input type="text" formControlName="album" /></div>
+        <div class="form-row"><label>Año</label><input type="number" formControlName="anno" /></div>
+        <div class="form-row"><label>Género</label><input type="text" formControlName="genero" /></div>
+      </div>
+    </div>
+
+    <button type="submit" [disabled]="playlistForm.invalid" class="btn btn-crear">
+      🎶 Crear Playlist
+    </button>
+  </form>
+
+  <div class="mensaje success" *ngIf="mensaje">{{ mensaje }}</div>
+
+</div>

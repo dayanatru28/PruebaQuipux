@@ -1,0 +1,261 @@
+/* Contenedor principal con padding */
+.container {
+  max-width: 900px;
+  margin: 2rem auto;
+  padding: 1rem 2rem;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #333;
+  background: #f8f9fa;
+  border-radius: 12px;
+  box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+}
+
+/* Título grande, centrado y limpio */
+.title-div h1 {
+  font-weight: 700;
+  font-size: 2.5rem;
+  text-align: center;
+  margin-bottom: 1.5rem;
+  color: #2c3e50;
+}
+
+/* Botón agregar con estilo moderno */
+.add-button {
+  background: linear-gradient(45deg, #34d399, #059669);
+  color: white;
+  font-weight: 600;
+  padding: 0.5rem 1.2rem;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  float: right;
+  margin-bottom: 1rem;
+  box-shadow: 0 4px 10px rgba(5, 150, 105, 0.3);
+}
+
+.add-button:hover {
+  background: linear-gradient(45deg, #059669, #065f46);
+  box-shadow: 0 6px 15px rgba(5, 150, 105, 0.5);
+}
+
+/* Tabla con bordes redondeados y sombra sutil */
+.table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0 12px;
+  background: white;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.table thead tr {
+  background-color: #10b981;
+  color: white;
+  font-weight: 700;
+  font-size: 1.1rem;
+  border-radius: 12px;
+}
+
+.table thead th {
+  padding: 1rem 1.5rem;
+  text-align: left;
+}
+
+.table tbody tr {
+  background-color: #ffffff;
+  transition: background-color 0.2s ease;
+  cursor: default;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+  border-radius: 12px;
+  margin-bottom: 12px;
+  display: table-row;
+}
+
+.table tbody tr:hover {
+  background-color: #e6fffa;
+}
+
+.table tbody td {
+  padding: 1rem 1.5rem;
+  vertical-align: middle;
+  border-top: none !important;
+}
+
+/* Botones dentro de tabla, diseño minimalista */
+.btn-container {
+  display: flex;
+  gap: 0.8rem;
+  justify-content: flex-start;
+}
+
+/* Botón editar: azul claro, estilo plano */
+.btn-edit {
+  background-color: #3b82f6;
+  border: none;
+  color: white;
+  padding: 0.4rem 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.95rem;
+  box-shadow: 0 3px 8px rgba(59,130,246,0.3);
+  transition: background-color 0.3s ease;
+}
+
+.btn-edit:hover {
+  background-color: #2563eb;
+}
+
+/* Botón toggle estado: diseño moderno con sombra */
+.btn-toggle {
+  border: none;
+  padding: 0.4rem 1rem;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 600;
+  box-shadow: 0 3px 8px rgba(220,53,69,0.3);
+  user-select: none;
+  color: white;
+  transition: background-color 0.3s ease;
+}
+
+.btn-active {
+  background-color: #10b981;
+  box-shadow: 0 3px 10px rgba(16,185,129,0.5);
+}
+
+.btn-active:hover {
+  background-color: #059669;
+  box-shadow: 0 5px 15px rgba(5,150,105,0.6);
+}
+
+.btn-inactive {
+  background-color: #ef4444;
+  box-shadow: 0 3px 10px rgba(239,68,68,0.5);
+}
+
+.btn-inactive:hover {
+  background-color: #b91c1c;
+  box-shadow: 0 5px 15px rgba(185,28,28,0.6);
+}
+
+.btn-edit i, .btn-toggle i {
+  font-size: 1.2rem;
+}
+
+/* Modal backdrop oscuro con transparencia */
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0,0,0,0.6);
+  z-index: 1050;
+}
+
+/* Modal dialog centrado y con sombra */
+.modal-dialog {
+  position: fixed !important;
+  top: 50% !important;
+  left: 50% !important;
+  transform: translate(-50%, -50%) !important;
+  z-index: 1100 !important;
+  max-width: 480px;
+  width: 90%;
+  border-radius: 14px;
+  box-shadow: 0 12px 25px rgba(0,0,0,0.25);
+  background-color: white;
+  overflow: hidden;
+}
+
+/* Modal header con fondo degradado */
+.modal-header {
+  background: linear-gradient(45deg, #059669, #10b981);
+  color: white;
+  padding: 1.2rem 1.5rem;
+  font-weight: 700;
+  font-size: 1.3rem;
+  border-bottom: none;
+}
+
+/* Modal body con padding y tipografía legible */
+.modal-body {
+  padding: 1.5rem 2rem;
+  font-size: 1rem;
+  color: #333;
+}
+
+/* Form inputs con borde suave y sombra */
+.form-control {
+  border-radius: 8px;
+  border: 1.5px solid #cbd5e1;
+  padding: 0.6rem 1rem;
+  font-size: 1rem;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.form-control:focus {
+  border-color: #10b981;
+  box-shadow: 0 0 6px #10b981aa;
+  outline: none;
+}
+
+/* Mensajes de error */
+.text-danger {
+  font-size: 0.85rem;
+  margin-top: 0.2rem;
+}
+
+/* Modal footer con botones alineados a la derecha */
+.modal-footer {
+  padding: 1rem 2rem 1.5rem;
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  background: #f9fafb;
+}
+
+/* Botón primario modal */
+.btn-primary {
+  background: linear-gradient(45deg, #10b981, #059669);
+  border: none;
+  color: white;
+  font-weight: 600;
+  padding: 0.5rem 1.3rem;
+  border-radius: 10px;
+  cursor: pointer;
+  box-shadow: 0 5px 15px rgba(16,185,129,0.6);
+  transition: background 0.3s ease;
+  font-size: 1rem;
+}
+
+.btn-primary:hover {
+  background: linear-gradient(45deg, #059669, #047857);
+}
+
+/* Botón secundario modal */
+.btn-secondary {
+  background-color: #e5e7eb;
+  border: none;
+  color: #374151;
+  padding: 0.5rem 1.3rem;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 1rem;
+  transition: background-color 0.3s ease;
+}
+
+.btn-secondary:hover {
+  background-color: #d1d5db;
+}
